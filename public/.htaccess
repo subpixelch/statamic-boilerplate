@@ -48,8 +48,8 @@ RewriteEngine On
 # ------------------------------------------------------------------------------
 # REDIRECT FROM HTTP TO HTTPS
 # ------------------------------------------------------------------------------
-RewriteCond %{HTTPS} off
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+#RewriteCond %{HTTPS} off
+#RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 # ------------------------------------------------------------------------------
 # REMOVE TRAILING SLASHES
