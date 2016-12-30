@@ -1,0 +1,15 @@
+<nav>
+    <ul>
+        <li>
+            <a href="{{ path src="/" }}" class="{{ if segment_1 == "" }}on{{ /if }}">Home</a>
+        </li>
+        {{ nav from="/" max_depth="2" is_hidden:isnt_set="true" }}
+        <li>
+            <a {{ if !children }} href="{{ url }}" {{ /if }}  class="{{ if is_current || is_parent }}on{{ /if }}{{ if children }} category{{ /if }}">{{ title }}</a>
+            {{ if children }}
+            <ul>{{ *recursive children* }}</ul>
+            {{ /if }}
+        </li>
+        {{ /nav }}
+    </ul>
+</nav>

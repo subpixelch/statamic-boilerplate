@@ -1,0 +1,87 @@
+<div class="alert alert-danger" v-if="hasErrors">
+    <ul>
+        <li v-for="error in errors">{{ error }}</li>
+    </ul>
+</div>
+
+<div class="publish-form card">
+    <div class="head">
+        <h1 v-if="isNew">{{ translate('cp.creating_asset_container') }}</h1>
+        <h1 v-else>{{ translate('cp.editing_asset_container') }}</h1>
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary" @click="save">{{ translate('cp.save') }}</button>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="publish-fields">
+
+        <div class="form-group">
+            <label class="block">{{ translate('cp.title') }}</label>
+            <small class="help-block">{{ translate('cp.asset_name_instructions') }}</small>
+            <input type="text" class="form-control" v-model="config.title" autofocus="autofocus" />
+        </div>
+
+        <div class="form-group" v-if="isNew">
+            <label class="block">{{ translate('cp.handle') }}</label>
+            <div class="help-block">{{ translate('cp.asset_handle_instructions') }}</div>
+            <input type="text" class="form-control" v-model="config.handle" @keydown="isHandleModified = true" />
+        </div>
+
+        <div class="form-group">
+            <label class="block">{{ translate('cp.fieldset') }}</label>
+            <small class="help-block">{{ translate('cp.asset_fieldset_instructions') }}</small>
+            <fieldset-fieldtype :data.sync="config.fieldset"></fieldset-fieldtype>
+        </div>
+
+        <div class="form-group">
+            <label class="block">{{ translate('cp.driver') }}</label>
+            <small class="help-block">{{ translate('cp.asset_driver_instructions') }}</small>
+            <select-fieldtype :data.sync="config.driver" :options="drivers"></select-fieldtype>
+        </div>
+
+        <template v-if="driver === 'local'">
+            <div class="form-group">
+                <label class="block">{{ translate('cp.path') }}</label>
+                <small class="help-block">{{ translate('cp.asset_path_instructions') }}</small>
+                <input type="text" class="form-control" v-model="config.local.path" />
+            </div>
+
+            <div class="form-group">
+                <label class="block">{{ translate('cp.url') }}</label>
+                <small class="help-block">{{ translate('cp.asset_url_instructions') }}</small>
+                <input type="text" class="form-control" v-model="config.local.url" />
+            </div>
+        </template>
+
+        <template v-if="driver === 's3'">
+            <div class="form-group">
+                <label class="block">{{ translate('cp.access_key_id') }}</label>
+                <input type="text" class="form-control" v-model="config.s3.key" />
+            </div>
+
+            <div class="form-group">
+                <label class="block">{{ translate('cp.secret_access_key') }}</label>
+                <input type="text" class="form-control" v-model="config.s3.secret" />
+            </div>
+
+            <div class="form-group">
+                <label class="block">{{ translate('cp.bucket') }}</label>
+                <input type="text" class="form-control" v-model="config.s3.bucket" />
+            </div>
+
+            <div class="form-group">
+                <label class="block">{{ translate('cp.region') }}</label>
+                <select-fieldtype :data.sync="config.s3.region" :options="s3Regions"></select-fieldtype>
+            </div>
+
+            <div class="form-group">
+                <label class="block">{{ translate('cp.path') }}</label>
+                <input type="text" class="form-control" v-model="config.s3.path" />
+            </div>
+        </template>
+
+    </div>
+</div>

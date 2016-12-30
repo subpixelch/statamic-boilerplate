@@ -1,0 +1,236 @@
+<div class="asset-listing"
+    :class="{ 'being-dragging': beingDragged }"
+     @dragover="draggingFile = true"
+     @dragleave="draggingFile = false"
+     @drop="draggingFile = false"
+ >
+    <input type="file" multiple="multiple" class="system-file-upload hide">
+
+    <div v-if="loading" class="loading">
+        <span class="icon icon-circular-graph animation-spin"></span> {{ translate('cp.loading') }}
+    </div>
+
+    <div class="drag-notification" v-show="draggingFile">
+        <div>
+            <i class="icon icon-download"></i>
+            <h3>{{ translate('cp.drop_to_upload') }}</h3>
+        </div>
+    </div>
+
+    <div class="asset-listing table asset-listing-uploads" v-if="assetQueue.length">
+        <table>
+            <thead>
+                <tr>
+                    <th class="column-checkbox"></th>
+                    <th colspan="2">{{ translate_choice('cp.uploads', 2) }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="asset in assetQueue">
+                    <td class="column-checkbox">
+                        <span class="icon icon-circular-graph animation-spin" v-if="asset.status !== 'error'"></span>
+                        <span class="icon icon-warning error" v-else></span>
+                    </td>
+                    <td class="column-filename">
+                        <img :src="fileIcon(asset.extension)" />
+                        {{ asset.basename }}
+                    </td>
+                    <td class="column-progress" v-if="asset.status !== 'error'">
+                        <div class="progress">
+                            <div class="progress-bar" :style="{ width: asset.uploadPercent+'%' }"></div>
+                        </div>
+                    </td>
+                    <td class="column-error" v-else>{{ asset.errorMessage }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr />
+    </div>
+
+    <div class="actions" v-if="!loading">
+        <template v-if="hasItems">
+            <input type="checkbox" id="checkbox-all" :checked="allItemsChecked" @click="checkAllItems" />
+            <label for="checkbox-all"></label>
+
+            <button type="button" class="btn" @click.prevent="deleteAssets">
+                {{ translate('cp.delete') }}
+            </button>
+        </template>
+
+        <button @click="createFolder" class="btn">
+            {{ translate('cp.new_folder') }}
+        </button>
+
+        <button type="button" class="btn" @click.prevent="openFinder">{{ translate('cp.upload_asset')}}</button>
+
+        <input type="text" :placeholder="translate('cp.search')" @keydown.esc="search = null" v-model="search" class="search" />
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-icon" @click="mode = 'grid'" :class="{'depressed': mode == 'grid'}">
+                <span class="icon icon-grid"></span>
+            </button>
+            <button type="button" class="btn btn-icon" @click="mode = 'table'" :class="{'depressed': mode == 'table'}">
+                <span class="icon icon-list"></span>
+            </button>
+        </div>
+    </div>
+
+    <div v-if="!loading && (hasItems || hasParent)">
+        <div class="asset-listing table" v-if="mode == 'table'">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="column-checkbox"></th>
+                        <th class="column-sortable" @click="sortBy('title')">
+                            {{ translate('cp.title') }}
+                            <i v-if="sortCol === 'title'"
+                               class="icon icon-chevron-{{ (sortOrders.title > 0) ? 'down' : 'up' }}"></i>
+                        </th>
+                        <th class="column-sortable" @click="sortBy('basename')">
+                            {{ translate('cp.filename') }}
+                            <i v-if="sortCol === 'basename'"
+                               class="icon icon-chevron-{{ (sortOrders.basename > 0) ? 'down' : 'up' }}"></i>
+                        </th>
+                        <th class="column-sortable" @click="sortBy('size_b')">
+                            {{ translate('cp.filesize') }}
+                            <i v-if="sortCol === 'size_b'"
+                               class="icon icon-chevron-{{ (sortOrders.size_b > 0) ? 'down' : 'up' }}"></i>
+                        </th>
+                        <th class="column-sortable" @click="sortBy('last_modified')">
+                            {{ translate('cp.date_modified') }}
+                            <i v-if="sortCol === 'last_modified'"
+                               class="icon icon-chevron-{{ (sortOrders.last_modified > 0) ? 'down' : 'up' }}"></i>
+                        </th>
+                        <th class="column-actions"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr v-if="hasParent">
+                        <td></td>
+                        <td>
+                            <a href="" @click.prevent="goToFolder(folder.parent_path)">
+                                <img :src="resource_url('img/filetypes/folder.png')" class="folder">
+                                ({{ translate('cp.parent_folder') }})
+                            </a>
+                        </td>
+                        <td colspan="3">..</td>
+                        <td></td>
+                    </tr>
+                    <tr v-for="folder in folders | filterBy search">
+                        <td></td>
+                        <td>
+                            <a href="" @click.prevent="goToFolder(folder.path)">
+                                <img :src="resource_url('img/filetypes/folder.png')" class="folder">
+                                {{ folder.title }}
+                            </a>
+                        </td>
+                        <td colspan="3"></td>
+                        <td class="column-actions">
+                            <div class="btn-group">
+                                <button type="button" class="btn-more dropdown-toggle"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="icon icon-dots-three-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="" @click.prevent="editFolder(folder.path)">{{ translate('cp.edit') }}</a></li>
+                                    <li class="divider"></li>
+                                    <li class="warning"><a href="" @click.prevent="deleteFolder(folder.path)">{{ translate('cp.delete') }}</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr v-for="asset in assets | orderBy sortCol sortOrders[sortCol] | filterBy search">
+                        <td>
+                            <div class="faux-checkbox" :class="{ 'checked': isSelected(asset) }" @click="selectAsset(asset)"></div>
+                        </td>
+                        <td>
+                            <span class="asset" @click="selectAsset(asset)" @dblclick="editAsset(asset.uuid)">
+                                <img :src="asset.thumbnail" title="{{ asset.title }}" v-if="asset.is_image" class="image">
+                                <img :src="fileIcon(asset.extension)" class="file" v-else>
+                                {{ asset.title }}
+                            </span>
+                        </td>
+                        <td>{{ asset.basename }}</td>
+                        <td>{{ asset.size }}</td>
+                        <td>{{ asset.last_modified }}</td>
+                        <td class="column-actions">
+                            <div class="btn-group">
+                                <button type="button" class="btn-more dropdown-toggle"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="icon icon-dots-three-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="" @click.prevent="editAsset(asset.uuid)">{{ translate('cp.edit') }}</a></li>
+                                    <li class="divider"></li>
+                                    <li class="warning"><a href="" @click.prevent="deleteAsset(asset.uuid)">{{ translate('cp.delete') }}</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="asset-listing grid" v-if="mode == 'grid'">
+
+        <!--<template>-->
+            <div v-if="hasParent" class="asset-thumbnail" @click.prevent.stop="goToFolder(folder.parent_path)">
+                <div class="asset-thumb">
+                    <a href="" @click.prevent.stop="goToFolder(folder.parent_path)">
+                        <img :src="resource_url('img/filetypes/folder.png')" class="folder">
+                    </a>
+                </div>
+                <div class="asset-filename">({{ translate('cp.parent_folder') }})</div>
+            </div>
+
+            <div v-for="folder in folders | filterBy search"
+                 class="asset-thumbnail"
+                 @click.prevent="goToFolder(folder.path)"
+            >
+                <div class="asset-thumb">
+                    <a href="" @click.prevent.stop="goToFolder(folder.path)">
+                        <img :src="resource_url('img/filetypes/folder.png')" class="folder">
+                    </a>
+                </div>
+                <div class="asset-filename">{{ folder.title }}</div>
+            </div>
+        <!--</template>-->
+
+        <div class="asset-thumbnail selectable"
+             :class="{ 'selected': isSelected(asset), 'is-image': asset.is_image, 'is-file': !asset.is_image }"
+             v-for="asset in assets | filterBy search"
+             @click="selectAsset(asset)"
+        >
+            <a href="" @click.prevent.stop="editAsset(asset.uuid)" class="edit"><button class="btn btn-icon icon icon-pencil" alt="Edit"></button></a>
+            <span v-if="isSelected(asset)" class="order">{{ getOrder(asset) }}</span>
+
+            <div class="asset-thumb">
+                <img :src="asset.thumbnail" :title="asset.title" v-if="asset.is_image">
+                <img :src="fileIcon(asset.extension)" v-else>
+            </div>
+
+            <div class="asset-filename">{{ getLabel(asset) }}</div>
+        </div>
+    </div>
+
+
+    <div class="no-results" v-if="!loading && !hasItems">
+        <span class="icon icon-folder"></span>
+        <h2>{{ translate('cp.asset_folder_empty_heading') }}</h2>
+        <h3>{{ translate('cp.asset_folder_empty') }}</h3>
+    </div>
+
+    <asset-editor v-if="editingAsset" :show.sync="editingAsset" :uuid.sync="editedAssetUuid"></asset-editor>
+
+    <asset-folder-editor v-if="showFolderEditor"
+                         :show.sync="showFolderEditor"
+                         :container="container"
+                         :path.sync="folderModalPath"
+                         :create.sync="creatingFolder">
+    </asset-folder-editor>
+</div>

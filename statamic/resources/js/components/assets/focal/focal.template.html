@@ -1,0 +1,35 @@
+<div>
+
+    <p class="form-control-static">
+        {{ x }}% / {{ y }}%
+        &nbsp;
+        <a href="#" @click.prevent="open" class="focal-point-trigger">{{ translate('cp.edit') }}...</a>
+    </p>
+
+    <div class="focal-point" v-if="show">
+
+        <div class="focal-point-toolbox card">
+
+            <div class="form-group">
+                <label>{{ translate('cp.focal_point_label') }}</label>
+                <small class="help-block">{{ translate('cp.focal_point_instructions') }}</small>
+                <div class="focal-point-image">
+                    <img :src="url" @click="define" />
+                    <div class="focal-point-reticle" :style="{ top: y+'%', left: x+'%' }"></div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" @click="select">{{ translate('cp.select') }}</button>
+            <button type="button" class="btn btn-default" @click="cancel">{{ translate('cp.cancel') }}</button>
+
+            <span class="focal-point-values pull-right text-muted">
+                X: {{ x }}% / Y: {{ y }}%
+            </span>
+        </div>
+
+        <div v-for="n in 9"
+             class="frame frame-{{ n+1 }}"
+             :style="{ backgroundImage: 'url('+url+')', backgroundPosition: bgPosition }">
+        </div>
+    </div>
+</div>

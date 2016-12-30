@@ -1,0 +1,22 @@
+d32e14fb-08c9-44c2-aaf8-21200852bafd:
+  title: Admin
+  permissions:
+    - super
+079c9966-1469-446c-ba9a-a3ea2f6c0e36:
+  title: Content Manager
+  slug: content_manager
+  permissions:
+    - cp:access
+    - content:view_drafts_on_frontend
+    - pages:edit
+    - pages:create
+    - pages:delete
+    - pages:reorder
+    - collections:news:edit
+    - collections:news:create
+    - collections:news:delete
+    - globals:site_settings:edit
+    - assets:assets:edit
+    - assets:assets:create
+    - assets:assets:delete
+    - forms

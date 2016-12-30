@@ -1,0 +1,113 @@
+<div class="publish-form" id="publish-form" :class="{'no-meta' : ! shouldShowMeta}">
+
+    <div v-if="loading" class="loading loading-blocker">
+        <span class="icon icon-circular-graph animation-spin"></span> {{ translate('cp.loading') }}
+    </div>
+
+    <div class="alert alert-danger" v-if="hasErrors">
+        <ul>
+            <li v-for="error in errors">{{ error }}</li>
+        </ul>
+    </div>
+
+    <div id="publish-controls" class="head sticky">
+
+        <h1 id="publish-title">
+            <span v-if="! isDefaultLocale" class="locale">{{ locale }}</span>
+            <span>{{ title }}</span>
+        </h1>
+
+        <div class="controls">
+
+            <user-options v-if="isUser && !isNew" :username="slug" :status="contentData.status"></user-options>
+
+            <template v-if="editingLayout">
+                <button class="btn" @click="editLayout(false)">
+                    {{ translate('cp.cancel') }}
+                </button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary" @click="saveLayout">
+                        {{ translate('cp.save_layout') }}
+                    </button>
+                </div>
+            </template>
+
+            <div class="btn-group" v-if="$parent.isPublishPage">
+                <button type="button" class="btn btn-secondary" @click.prevent="$parent.preview">{{ translate('cp.sneak_peek') }}</button>
+            </div>
+
+            <div class="btn-group" v-if="!editingLayout">
+                <button type="button" class="btn btn-primary" v-on:click="publish">{{ translate('cp.save') }}</button>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">{{ translate('cp.toggle_dropdown') }}</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="" id="publish-continue" @click.prevent="publishAndContinue">{{ translate('cp.save_and_continue') }}</a></li>
+                    <li v-if="canEditLayout"><a href="" @click.prevent="editLayout(true)">{{ translate('cp.edit_layout') }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="publish-meta" v-if="shouldShowMeta">
+        <div class="card">
+            <div class="publish-fields">
+                <div class="form-group title-field" v-if="shouldShowTitle">
+                    <label class="block">{{ titleDisplayName }}</label>
+                    <input type="text" class="form-control type-text" autofocus="autofocus" v-model="formData.fields.title" placeholder="{{ translate('cp.new') }} {{ contentType }}" />
+                </div>
+
+                <div class="form-group inline">
+                    <div class="form-group major" v-if="shouldShowSlug">
+                        <label class="block">{{ translate('cp.slug') }}</label>
+                        <input type="text" v-model="formData.slug" class="form-control mono" @keydown="modifySlug"
+                        placeholder="{{ translate('cp.new').toLowerCase() }}-{{ contentType.toLowerCase() }}">
+                    </div>
+
+                    <div class="form-group major" v-if="shouldShowDate">
+                        <label class="block">{{ translate('cp.date_and_time') }}</label>
+                        <date-fieldtype name="date" :data.sync="formData.extra.datetime" ></date-fieldtype>
+                    </div>
+
+                    <locale-selector v-if="shouldShowLocales" :locales="locales"></locale-selector>
+
+                    <div v-if="shouldShowStatus && ! editingLayout" class="form-group minor">
+                        <label>{{ translate('cp.published') }}</label>
+                        <toggle-fieldtype name="status" :data.sync="formData.status"></toggle-fieldtype>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="publish-fields">
+        <div class="card">
+            <div :class="{ 'editing-layout': editingLayout }">
+                <div class="publish-main">
+
+                    <div class="publish-fields title-field">
+                        <div class="form-group" v-if="shouldShowTitle">
+                            <label class="block">{{ titleDisplayName }}</label>
+                            <input type="text" class="form-control type-text" autofocus v-model="formData.fields.title" placeholder="{{ translate('cp.new') }} {{ contentType }}" />
+                        </div>
+                    </div>
+
+                    <publish-fields :errors="errors"
+                                    :fieldset-name="fieldsetName"
+                                    :uuid="uuid"
+                                    :locale="locale"
+                                    :editing-fieldset="editingLayout"
+                                    :field-data="formData.fields"
+                                    :env="extra.env"
+                                    :remove-title="removeTitle"
+                                    :focus="! hasAnyMetaData">
+                    </publish-fields>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

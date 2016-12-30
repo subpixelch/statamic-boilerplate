@@ -1,0 +1,15 @@
+fieldtype_fields:
+  mode:
+    type: select
+    default: table
+    options:
+      table: Table
+      stacked: Stacked
+  max_rows:
+    type: text
+  min_rows:
+    type: text
+  add_row:
+    type: text
+  fields:
+    type: fields

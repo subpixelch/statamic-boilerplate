@@ -1,0 +1,44 @@
+license_key: 5656a870-b991-462d-8d55-a6966a5d8412
+locales:
+  en:
+    full: en_US
+    name: English
+    url: "{env:APP_URL}"
+timezone: Europe/Brussels
+date_format: F jS, Y
+default_extension: html
+filesystems:
+  content:
+    driver: local
+    root: storage/content
+  storage:
+    driver: local
+    root: storage
+  users:
+    driver: local
+    root: storage/users
+  themes:
+    driver: local
+    root: themes
+    url: /
+app_key: "{env:APP_KEY}"
+redactor:
+  - 
+    name: Standard
+    settings:
+      buttons:
+        - formatting
+        - bold
+        - italic
+        - unorderedlist
+        - orderedlist
+        - html
+  - 
+    name: Basic
+    settings:
+      buttons:
+        - bold
+        - italic
+csrf_exclude: [ ]
+send_powered_by_header: true
+ensure_unique_ids: true

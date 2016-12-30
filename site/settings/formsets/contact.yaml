@@ -1,0 +1,23 @@
+title: Contact
+honeypot: ditmoetleegblijven
+fields:
+  name:
+    display: Naam
+    validate: required|min:2
+  email:
+    display: E-mail
+    validate: required|email
+  phone:
+    display: Telefoonnummer
+    validate: ""
+  comment:
+    display: Vraag
+columns:
+  - name
+  - phone
+  - email
+  - comment
+metrics:
+  - 
+    type: total
+    label: Aantal inzendingen

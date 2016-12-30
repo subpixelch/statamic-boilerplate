@@ -1,0 +1,219 @@
+fields:
+  standard_content_section:
+    type: section
+    display: Page Content
+
+  standard_content:
+    type: replicator
+    instructions: Insert whatever type of content you need. Rearrange as necessary.
+    sets:
+
+      header_set:
+        display: Text Heading
+        fields:
+          hdr_text:
+            display: Text
+            type: redactor
+            options:
+              buttons:
+                - bold
+                - italic
+                - html
+              paragraphy: false
+              linebreaks: true
+              minHeight: 50
+          hdr_type:
+            display: Type
+            type: select
+            options:
+              #h1: Heading 1
+              h2: Heading 2
+              h3: Heading 3
+              h4: Heading 4
+          hdr_link:
+            display: Create a link to this header at the top of the page.
+            type: checkbox
+            hide: true
+
+      text_set:
+        display: Text
+        fields:
+          content:
+            display: Text
+            type: redactor
+            image_dir: assets/img/
+            resize:
+              width: 500
+              height: 300
+              quality: 60
+              upsize: false
+            options:
+              buttons:
+               - bold
+               - italic
+               - deleted
+               - '|'
+               - unorderedlist
+               - orderedlist
+               - outdent
+               - indent
+               - '|'
+               - image
+               - file
+               - video
+               - table
+               - link
+               - horizontalrule
+               - '|'
+               - html
+
+      img_set:
+        display: Image
+        fields:
+          img:
+            display: Image
+            type: file
+            allowed: [png, gif, jpg, jpeg]
+            destination: assets/img/
+            show_thumbnail: true
+            max_files: 1
+            resize:
+              width: 800
+              height: 600
+              quality: 60
+          img_caption:
+            type: text
+            display: Caption
+          img_layout:
+            type: select
+            display: Layout Position
+            options:
+              s-img-full: No float
+              s-img-inset-left: Float left
+              s-img-inset-right: Float right
+
+      table_set:
+        display: Table
+        fields:
+          first_row_hdr:
+            type: checkbox
+            display: Make the first row a table header
+          table:
+            type: table
+            display: Table
+
+      gallery_set:
+        display: Gallery
+        fields:
+          gallery_img:
+            display: Images
+            instructions: Drag and drop one or more photos here to create a gallery.
+            type: file
+            allowed: [png, gif, jpg, jpeg]
+            destination: assets/gallery/
+            show_thumbnail: true
+            resize:
+              width: 800
+              height: 600
+              quality: 60
+
+      file_list_set:
+        display: File List
+        fields:
+          file_list:
+            display: File List
+            type: grid
+            starting_rows: 1
+            min_rows: 1
+            fields:
+              file:
+                type: file
+                display: File
+                allowed: [pdf, doc, docx, txt, ppt, pptx, xls, xlsx]
+                max_files: 1
+                destination: assets/file/
+                show_thumbnail: false
+              description:
+                display: Description
+                type: text
+                width: 50%
+
+      faq_set:
+        display: FAQ
+        fields:
+          faq_title:
+            type: text
+            display: FAQ Section Title
+          faq_list:
+            display: Questions and Answers
+            type: grid
+            starting_rows: 1
+            min_rows: 1
+            fields:
+              faq_question:
+                type: textarea
+                display: Question
+                width: 35%
+              faq_answer:
+                type: redactor
+                display: Answer
+                width: 65%
+          faq_link:
+            display: Create a link to this FAQ at the top of the page.
+            type: checkbox
+
+      embed_set:
+        display: Embed
+        fields:
+          embed:
+            type: textarea
+            display: Embed a Video or Map
+            instructions: You may include embed code from YouTube or Google Maps here.
+            height: 100
+
+      directory_set:
+        display: Personel Directory
+        fields:
+          directory_list:
+            display: Directory List
+            type: grid
+            starting_rows: 1
+            min_rows: 1
+            fields:
+              photo:
+                type: file
+                display: File
+                allowed: [png, gif, jpg, jpeg]
+                destination: assets/gallery/
+                show_thumbnail: true
+                max_files: 1
+                width: 20%
+                resize:
+                  width: 400
+                  height: 400
+                  quality: 60
+              name:
+                display: Name
+                type: text
+                width: 25%
+              description:
+                display: Text
+                type: redactor
+                width: 25%
+                options:
+                  buttons:
+                    - bold
+                    - italic
+                    - html
+                  paragraphy: false
+                  linebreaks: true
+                  minHeight: 50
+              phone:
+                display: Phone (optional)
+                type: text
+                width: 15%
+              email:
+                display: Email (optional)
+                type: text
+                width: 15%
+hide: true

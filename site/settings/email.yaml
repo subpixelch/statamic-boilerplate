@@ -1,0 +1,7 @@
+driver: log
+from_email: noreply@marbles.be
+from_name: 'Marbles'
+port: 587
+encryption: tls
+username: ""
+password: ""

@@ -1,0 +1,8 @@
+.env
+
+public/default/css
+public/default/img
+public/default/js
+
+node_modules
+bower_components

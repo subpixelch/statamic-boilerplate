@@ -1,0 +1,16 @@
+fields:
+
+  image_manipulation_route:
+  image_manipulation_secure:
+    type: toggle
+  auto_crop:
+    type: toggle
+  image_manipulation_driver:
+    type: radio
+    options:
+      gd: GD
+      imagick: ImageMagick
+  image_manipulation_cached:
+    type: toggle
+  image_manipulation_cached_path:
+    type: text

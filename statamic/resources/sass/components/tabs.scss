@@ -1,0 +1,19 @@
+.tabs {
+    @extend .card;
+    @extend .flush;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    width: 100%;
+
+    a {
+        display: block;
+        padding: 15px 20px;
+    }
+
+    a.active {
+        color: $brand-primary;
+        border-bottom: 2px solid $brand-primary;
+    }
+}

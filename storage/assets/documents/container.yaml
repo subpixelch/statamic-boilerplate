@@ -1,0 +1,4 @@
+path: storage/assets/documents
+url: /documents
+driver: local
+title: Documenten

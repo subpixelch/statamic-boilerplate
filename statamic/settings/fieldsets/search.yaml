@@ -1,0 +1,17 @@
+fields:
+  driver:
+    type: select
+    options:
+      zend: Zend (Local filesystem)
+      algolia: Algolia
+  algolia_api_key:
+    width: 50
+  algolia_app_id:
+    width: 50
+  algolia_searchable_attributes:
+    type: list
+    width: 100
+  auto_index:
+     type: toggle
+  default_index:
+    type: text

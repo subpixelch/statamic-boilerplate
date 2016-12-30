@@ -1,0 +1,8 @@
+fieldtype_fields:
+  settings:
+    type: redactor_settings
+  container:
+    type: asset_container
+    allow_blank: true
+  folder:
+    type: asset_folder

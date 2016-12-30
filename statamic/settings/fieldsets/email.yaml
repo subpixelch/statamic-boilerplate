@@ -1,0 +1,34 @@
+fields:
+  section_general:
+    type: section
+  driver:
+    type: select
+    options:
+      smtp: SMTP
+      mail: PHP Mail
+      sendmail: Sendmail
+      log: Log
+      mailgun: Mailgun
+      mandrill: Mandrill
+  from_email:
+  from_name:
+
+  section_smtp:
+    type: section
+  host:
+  port:
+  encryption:
+    type: select
+    options:
+      tls: TLS
+  username:
+  password:
+
+  section_mandrill:
+    type: section
+  mandrill_secret:
+
+  section_mailgun:
+    type: section
+  mailgun_secret:
+  mailgun_domain:

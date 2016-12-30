@@ -1,0 +1,90 @@
+.form-group .list-group,
+.list-group {
+	&.no-border .list-group-item {
+		border-left: none;
+		border-right: none;
+		border-radius: 0;
+		padding: 10px 15px 10px 15px;
+
+		.icon-status {
+			margin-right: 7px;
+			margin-top: 7px;
+		}
+	}
+}
+
+.list-fieldtype ul {
+    @extend .list-unstyled;
+    border: 1px solid $color_border;
+    padding: 10px 15px;
+    border-radius: 3px;
+    margin: 0;
+}
+
+.list-fieldtype li {
+	padding-left: 25px;
+	background: url('../img/bullet.png') no-repeat 11px 9px;
+	margin-bottom: 3px;
+    font-size: 16px;
+
+    &:active { cursor: ns-resize; }
+
+	&.editing {
+		padding-left: 0px;
+		background: #fff;
+	}
+
+
+	&:last-child {
+		padding-left: 0;
+        margin-bottom: 0;
+		background: none;
+	}
+
+	input {
+		background-image: url('../img/bullet.png');
+		background-repeat: no-repeat;
+		background-position: 12px 13px;
+		text-indent: 15px;
+        padding: 5px 10px;
+        height: auto;
+        margin-top: 5px;
+	}
+
+    .delete {
+	    background: rgba(0, 0, 0, 0) url(../img/delete.png) no-repeat 2px 4px;
+	    width: 12px;
+	    height: 12px;
+	    margin-left: 1px;
+	    display: inline-block;
+	    opacity: 0;
+	    cursor: pointer;
+	}
+
+	&:hover .delete {
+		opacity: 1;
+	}
+}
+
+.grid-fieldtype .list-fieldtype {
+    padding: 8px 0 10px;
+    ul {
+        border: none;
+        padding: 0;
+        border-radius: 0;
+    }
+    li {
+        background-position: 10px 9px;
+        font-size: 14px;
+        margin: 0;
+        input {
+            background-position: 10px 9px;
+            padding: 0 10px;
+            margin-top: 0;
+        }
+    }
+    .ui-sortable-helper {
+        box-shadow: none;
+        .delete { display: none; }
+    }
+}

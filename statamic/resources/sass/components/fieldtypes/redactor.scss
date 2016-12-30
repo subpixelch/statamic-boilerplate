@@ -1,0 +1,23 @@
+.redactor-editor {
+	@extend .form-control;
+    -webkit-font-smoothing: antialiased;
+    padding: 24px 32px;
+    min-height: 250px !important; // javascript inline styles are the devil
+}
+
+.redactor-toolbar {
+    @include toolbar;
+	margin: 0 1px !important;
+    z-index: 5;
+}
+
+.redactor-toolbar li a:hover {
+    background: $brand-primary;
+}
+
+// Our stylesheet hides checkboxes, and shows fancy ones with
+// special markup. This doesn't use the markup so it's hidden.
+// We'll just bring it back manually.
+#redactor-modal input[type=checkbox] {
+	display: inline-block;
+}

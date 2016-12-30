@@ -1,0 +1,12 @@
+title: Default Globals
+hide: true
+fields:
+  site_name:
+    type: text
+    display: Website Naam
+    instructions: De naam van je website
+    localizable: true
+  site_twitter:
+    type: text
+    display: Twitter account
+    instructions: Twitter handle van de website, prefix met "@"

@@ -1,0 +1,23 @@
+.sweet-alert {
+	font-family: $font_lato;
+}
+
+.sweet-alert button {
+	border-radius: 3px;
+	font-size: 16px;
+	background: $brand-primary;
+}
+
+.flashdance .alert {
+	@extend .z-depth-1;
+	border-radius: 0;
+	margin-bottom: 15px;
+	padding-left: 30px;
+	padding-right: 45px;
+	position: relative;
+}
+
+.alert-dismissible:focus,
+.alert-dismissible .close:focus {
+    outline: none;
+}

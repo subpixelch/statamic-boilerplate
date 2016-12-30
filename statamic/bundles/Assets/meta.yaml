@@ -1,0 +1,7 @@
+fieldtype_fields:
+  container:
+    type: asset_container
+  folder:
+    type: asset_folder
+  max_files:
+    type: text

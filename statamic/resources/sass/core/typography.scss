@@ -1,0 +1,37 @@
+body {
+    color: $color_gray_dark;
+	font-family: $font_lato;
+    font-size: 16px;
+}
+
+h1 {
+	font: normal 21px $font_lato;
+	margin: 0;
+    -webkit-font-smoothing: antialiased;
+
+	strong {
+		color: $color_gray_dark;
+		font-weight: normal;
+	}
+}
+
+h2 { font-size: 18px; }
+h3 { font-size: 16px; }
+
+a {
+    color: $brand-darker;
+	&:hover {
+		color: $brand-primary;
+		text-decoration: none;
+	}
+}
+
+.subhead {
+    font: 11px $font_montserrat;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.normal {
+    font-weight: normal !important;
+}

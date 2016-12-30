@@ -1,0 +1,9 @@
+stache_always_update: '{env:STACHE_UPDATE}'
+static_caching_enabled: "{env:STATIC_CACHE_ENABLED}"
+static_caching_length: "{env:STATIC_CACHE_LENGTH}"
+static_caching_type: "{env:STATIC_CACHE_TYPE}"
+static_caching_file_path: "{env:STATIC_CACHE_FILE_PATH}"
+static_caching_ignore_query_strings: "{env:STATIC_CACHE_IGNORE_QUERY}"
+static_caching_exclude:
+  - /contact
+static_caching_invalidation: [ ]

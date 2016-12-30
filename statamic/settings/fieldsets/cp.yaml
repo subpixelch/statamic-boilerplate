@@ -1,0 +1,13 @@
+fields:
+
+  start_page:
+    type: select
+    options:
+      dashboard: Dashboard
+      pages: Pages
+
+  date_format:
+    type: text
+
+  widgets:
+    type: yaml

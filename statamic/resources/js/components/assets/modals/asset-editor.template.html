@@ -1,0 +1,38 @@
+<modal :show.sync="show" class="asset-modal asset-editor" :saving="saving" :loading="loading">
+    <template slot="header">{{ translate('cp.editing_asset') }}</template>
+    <template slot="body">
+        <div class="row">
+            <div class="publish col-md-8">
+                <publish-fields :fieldset-name="asset.fieldset"
+                                :uuid="asset.uuid"
+                                locale="en"
+                                :field-data="fields"
+                                :focus="true">
+                </publish-fields>
+            </div>
+            <div class="meta col-md-4">
+                <img :src="asset.thumbnail" v-if="asset.is_image" />
+
+                <div class="form-group">
+                    <label>ID</label>
+                    <p class="form-control-static"><small><code>{{ asset.uuid }}</code></small></p>
+                </div>
+
+                <div class="form-group">
+                    <label>{{ translate('cp.filename') }}</label>
+                    <p class="form-control-static">{{ asset.basename }}</p>
+                </div>
+
+                <div class="form-group" v-if="asset.is_image">
+                    <label>{{ translate('cp.focal_point') }}</label>
+                    <focal-point :data.sync="fields.focus" :url="asset.url"></focal-point>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template slot="footer">
+        <button type="button" class="btn" @click="close">{{ translate('cp.close') }}</button>
+        <button type="button" class="btn btn-primary btn-small" @click="save">{{ translate('cp.save') }}</button>
+    </template>
+</modal>

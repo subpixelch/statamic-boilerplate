@@ -1,0 +1,235 @@
+.select,
+.btn,
+.btn-default {
+    @include button(#f4f4f4, #ccc, $color_gray_dark);
+    .icon {
+        color: #777;
+        text-shadow: 0 1px 1px #fff;
+    }
+}
+
+.btn:focus {
+    box-shadow: 0 0 10px rgba($brand-primary, .9);
+}
+
+.btn-primary {
+    @include button($brand-primary, darken($brand-primary, 13%));
+    text-shadow: 0px 1px 1px rgba(0,0,0,.2);
+}
+
+.btn-secondary {
+    @include button($brand-secondary, darken($brand-secondary, 13%));
+    text-shadow: 0px 1px 1px rgba(0,0,0,.2);
+}
+
+.btn-outside {
+    @include button(#76a7a4, #537977);
+    text-shadow: 0px 1px 1px rgba(0,0,0,.2);
+}
+
+.btn-delete {
+    @include button($color_red, darken($color_red, 10%));
+}
+
+.btn-icon {
+    padding: 6px 8px;
+    border-radius: 2px;
+}
+
+.btn-primary.btn-icon .icon,
+.btn-primary.btn-with-icon .icon {
+    color: #fff;
+    text-shadow: none;
+}
+
+.btn-icon-small,
+td .btn-icon {
+    @extend .btn-icon;
+    height: 22px;
+    padding: 1px 5px;
+}
+
+.btn-with-icon .icon {
+    margin: -5px 7px 0 -3px;
+    position: relative;
+    top: 1px;
+}
+
+
+.btn.btn-lg {
+	font-size: 16px;
+    height: 50px;
+	padding: 14px 40px;
+}
+
+.btn-white {
+    @include button(#fff, #ddd, $color_gray_dark);
+}
+
+.btn i.icon {
+    color: #d0d4d7;
+	vertical-align: top;
+	line-height: 0;
+}
+.btn:hover i.icon {
+	color: darken(#d0d4d7, 10%);
+}
+
+.btn-group {
+    .btn {
+        border-left: 1px solid transparent;
+        border-right: 1px solid transparent;
+    }
+
+    .btn:not(:first-child):hover,
+    .btn:not(:first-child).depressed
+     {
+        border-left: 1px solid rgba(0,0,0,.05);
+    }
+
+    .btn:not(:last-child):hover,
+    .btn:not(:last-child).depressed {
+        border-right: 1px solid rgba(0,0,0,.05);
+    }
+}
+
+.btn-upload {
+	border: dashed 1px $color_gray_upload;
+	color: $color_gray_upload;
+	font-size: 11px;
+	padding: 6px 20px;
+
+	@include box-shadow(none);
+
+	strong {
+		color: $color_gray_upload_alt;
+		font-family: $font_montserrat;
+		font-weight: normal;
+		text-transform: uppercase;
+	}
+
+	&.btn-upload-full {
+		border: none;
+		display: block;
+		font-size: 16px;
+		min-height: 400px;
+		padding-top: 40%;
+		width: 100%;
+
+		strong {
+			color: $color_gray_dark;
+			display: block;
+			font-size: 18px;
+			margin-top: -30%;
+			padding-top: 120px;
+
+			@include background('../img/arrow-drop.png', 12px 101px, transparent, top center);
+		}
+	}
+	&.btn-upload-small {
+		border: none;
+		font-size: 13px;
+		padding:30px 0;
+		width: 20%;
+
+		a {
+			font-weight: bold;
+		}
+		strong {
+			color: $color_gray_dark;
+			display: block;
+			padding-top: 35px;
+
+			@include background('../img/arrow-drop-small.png', 9px 31px, transparent, top center);
+		}
+	}
+}
+
+.open .dropdown-menu {
+	transform: scale(1);
+	opacity: 1;
+	z-index: 9999;
+	pointer-events: auto;
+}
+
+.dropdown-menu {
+	@extend .z-depth-2;
+	border: solid 1px rgba(0,0,0,.1);
+	border-radius: 6px;
+	left: auto;
+	pointer-events: none;
+	right: -28px;
+	margin-top: 5px;
+	min-width: 180px;
+	padding: 8px;
+	display: block;
+    transform-origin: 50% 90%;
+	animation-fill-mode: forwards;
+    opacity: 0;
+    transform: scale(.8);
+    transition: all .15s ease;
+    will-change: transform, opacity;
+
+	li > a {
+		padding: 5px 10px;
+		border-radius: 4px;
+
+		&:hover {
+			background: $brand-primary;
+			color: #fff;
+			text-shadow: 0 1px 1px rgba(0,0,0,.1);
+		}
+
+		.icon {
+			color: #d0d4d7 !important;
+			margin-right: 6px;
+			margin-left: -4px;
+			font-size: 12px;
+			width: 20px;
+			display: block;
+			float: left;
+			position: relative;
+			top: 2px;
+			line-height: inherit;
+			text-align: center;
+		}
+	}
+
+	li.warning a { color: $color_red; }
+	li.warning a:hover {
+		background: $color_red;
+		color: #fff;
+	}
+
+	li.divider {
+		margin: 5px -8px 6px;
+	}
+}
+
+.btn-more,
+.btn-more:active {
+	background: none;
+	border: none;
+	cursor: pointer;
+	display: inline-block;
+	padding: 0;
+	position: relative;
+	transition: all .2s ease;
+}
+
+.btn-group.open .dropdown-toggle.btn-more {
+	box-shadow: none;
+    transform: rotate(90deg);
+}
+
+.btn-more {
+	&:before {
+		line-height: 0;
+	}
+}
+
+.btn-circle {
+    svg path, svg circle {
+        fill: #2d393c;
+    }
+}

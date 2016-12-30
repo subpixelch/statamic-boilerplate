@@ -1,0 +1,128 @@
+body {
+	background: $bg;
+    display: flex;
+    padding-left: 180px;
+}
+
+a { cursor: pointer; }
+
+.relative { position: relative; }
+.inline { display: inline; }
+.inline-block { display: inline-block; }
+.block { display: block; }
+.border-top { border-top: solid 1px $color_border; }
+
+.mb-0 { margin-bottom: 0 !important; }
+.mt-30 { margin-top: 30px !important; }
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+.loading {
+	text-align: center;
+	padding: 20px 0;
+
+	.icon {
+		display: block;
+		margin-bottom: 5px;
+	}
+
+	&.loading-basic {
+		text-align: left;
+		padding: 0;
+
+		.icon {
+			display: inline-block;
+			margin: -2px 5px 0 0;
+		}
+	}
+}
+
+.loading-blocker {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10; // arbitrary to make it appear over the fields
+	background: rgba(white, .7);
+}
+
+// Saving overlay
+.saving {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 200;
+	background: rgba(white, .9);
+	display: flex;
+	align-items: center;
+	border-radius: 3px;
+
+	.inner {
+		text-align: center;
+		padding: 50px;
+		margin: 0 auto;
+	}
+
+	i {
+		position: relative;
+		top: -1px;
+		margin-right: 10px;
+	}
+}
+
+.no-select {
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.you-can-select-this {
+    -webkit-touch-callout: text !important;
+    -webkit-user-select: text !important;
+    -khtml-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+}
+
+a:hover,
+a:active,
+a:focus {
+	text-decoration: none;
+}
+
+.stuck .sticky {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: auto !important;
+    will-change: transform;
+	z-index: 101;
+}
+
+.mono {
+    font-family: $font_monospace;
+}
+
+.red { color: $color_red; }
+
+.mt { margin-top: 30px; }
+.mb { margin-bottom: 30px; }
+
+[v-cloak] { display: none; }
+
+.z-depth-0 { box-shadow: none !important; }
+.z-depth-1 { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);}
+.z-depth-2 { box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 2px 14px 0 rgba(0, 0, 0, 0.2); }
+.z-depth-3 { box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); } // Not deep enough
+.z-depth-4 { box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); } // Really not deep enough

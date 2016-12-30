@@ -1,0 +1,12 @@
+start_page: pages
+date_format: d/m/Y
+widgets:
+  - 
+    type: form
+    form: contact
+    limit: 5
+    title: Recent Submissions
+    fields:
+      - name
+      - email
+locale: en

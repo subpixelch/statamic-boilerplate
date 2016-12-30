@@ -1,0 +1,6 @@
+image_manipulation_route: /img
+image_manipulation_secure: true
+auto_crop: true
+image_manipulation_driver: gd
+image_manipulation_cached: false
+image_manipulation_cached_path: img

@@ -1,0 +1,10 @@
+fields:
+
+  debug:
+    type: toggle
+
+  debug_bar:
+    type: toggle
+
+  loggers:
+    type: yaml

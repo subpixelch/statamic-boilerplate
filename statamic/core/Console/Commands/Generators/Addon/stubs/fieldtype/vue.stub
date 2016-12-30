@@ -1,0 +1,25 @@
+Vue.component('dummy_addon-fieldtype', {
+
+    template: '<div>DummyAddon</div>',
+
+    props: ['data', 'config', 'name'],
+
+    data: function() {
+        return {
+            //
+        };
+    },
+
+    computed: {
+        //
+    },
+
+    methods: {
+        //
+    },
+
+    ready: function() {
+        //
+    }
+
+});

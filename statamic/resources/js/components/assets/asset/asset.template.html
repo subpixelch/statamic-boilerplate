@@ -1,0 +1,25 @@
+<div class="asset-thumbnail"
+     :class="{ 'is-image': isImage && isUploaded, 'is-file': !isImage }"
+     :title="asset.filename"
+>
+
+    <asset-editor v-if="asset.id" :show.sync="editing" :uuid="asset.id"></asset-editor>
+
+    <div class="controls">
+        <button @click="edit" class="btn btn-icon icon icon-pencil" :alt="translate('cp.edit')"></button>
+        <button @click="remove" class="btn btn-icon icon icon-trash" :alt="translate('cp.remove')"></button>
+
+    </div>
+
+    <div class="asset-thumb">
+        <a :href="toenail" class="zoom" v-if="isImage && isUploaded" :title="label"><img :src="thumbnail" /></a>
+        <img :src="icon" v-else>
+        <div class="asset-progress" v-if="!isUploaded" :style="{ width: uploadPercent+'%' }"></div>
+    </div>
+
+    <div class="asset-filename" :title="label">{{ label }}</div>
+
+    <div class="asset-status asset-success" v-if="uploadSucceeded"><i class="icon icon-check"></i></div>
+    <!-- <div class="asset-status asset-error" v-if="uploadFailed" :title="asset.errorMessage">!</div> -->
+    <!-- <div class="asset-filename" :title="asset.basename">{{ asset.basename }}</div> -->
+</div>

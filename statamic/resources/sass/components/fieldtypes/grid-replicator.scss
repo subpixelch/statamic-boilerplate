@@ -1,0 +1,60 @@
+/**
+ * Grid and Replicator have many similarities.
+ * These styles apply to both.
+ */
+
+.grid-field, .replicator-fieldtype {
+
+    .form-group {
+        padding: 0;
+    }
+
+    .list-group-item + .list-group-item {
+        padding-top: 20px;
+    }
+
+}
+
+.group-header {
+    @include toolbar;
+    box-shadow: none;
+
+    .btn-group > .icon,
+    .btn-group button > .icon {
+        cursor: pointer;
+        color: $color_gray_light;
+        margin: -4px 0 0 2px;
+        font-size: 18px;
+
+        &:hover {
+            color: $color_gray_dark;
+        }
+    }
+
+}
+
+.stacked-placeholder {
+    background: $bg;
+    margin-bottom: 20px;
+    border-radius: 3px;
+}
+
+/**
+ * Replicator styles only
+ */
+
+.replicator-fieldtype {
+}
+
+tr.excess {
+    background: #f2f2f2;
+    .form-control,
+    textarea,
+    input {
+    	&,
+    	&[type="checkbox"] + label:before,
+    	&[type="radio"] + label:before {
+    		background: #fff;
+        }
+    }
+}

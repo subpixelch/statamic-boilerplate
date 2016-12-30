@@ -1,0 +1,27 @@
+<modal :show.sync="show" class="asset-modal asset-folder-editor" :saving="saving" :loading="loading">
+    <template slot="header">
+        <h1 v-if="create">{{ translate('cp.create_folder') }}</h1>
+        <h1 v-if="!create">{{ translate('cp.edit_folder') }}</h1>
+    </template>
+
+    <template slot="body">
+
+        <div class="form-group">
+            <label class="block">{{ translate('cp.title') }}</label>
+            <small class="help-block">{{ translate('cp.folder_title_instructions') }}</small>
+            <input type="text" class="form-control" v-model="form.title" />
+        </div>
+
+        <div class="form-group" v-if="create">
+            <label class="block">{{ translate('cp.name') }}</label>
+            <small class="help-block">{{ translate('cp.folder_directory_instructions') }}</small>
+            <input type="text" class="form-control" v-model="form.basename" @keydown="basenameModified = true" />
+        </div>
+
+    </template>
+
+    <template slot="footer">
+        <button type="button" class="btn" @click="close">{{ translate('cp.close') }}</button>
+        <button type="button" class="btn btn-primary btn-small" @click="save">{{ translate('cp.save') }}</button>
+    </template>
+</modal>

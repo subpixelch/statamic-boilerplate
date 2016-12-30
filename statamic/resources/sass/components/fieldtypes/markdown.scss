@@ -1,0 +1,169 @@
+.markdown-fieldtype {
+
+    .markdown-fieldtype-wrapper {
+        border: 1px solid #cecece;
+        border-radius: 3px;
+    }
+
+    .markdown-toolbar {
+        box-shadow: none;
+        padding: 8px 10px;
+        border-bottom: 1px solid #cecece;
+    }
+
+    .markdown-modes, .markdown-buttons {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: inline-block;
+        }
+    }
+
+    .markdown-modes {
+        float: left;
+        margin-left: 10px;
+
+        li {
+            margin-right: 15px;
+        }
+
+        a {
+            color: #aaa;
+            &:hover {
+                color: #333;
+            }
+        }
+
+        .active {
+            position: relative;
+
+            &:before, &:after {
+                content: '';
+                border: 5px solid transparent;
+                border-bottom-color: #F2F2F2;
+                position: absolute;
+                top: 85%;
+                left: 50%;
+                z-index: 2;
+                margin-top: 2px;
+                margin-left: -3px;
+            }
+
+            &:after {
+                border-bottom-color: darken(#cecece, 5);
+                margin-top: 1px;
+                z-index: 1;
+            }
+
+            a {
+                color: #333;
+            }
+        }
+    }
+
+    .markdown-buttons {
+        float: right;
+
+        li a {
+            display: block;
+            padding: 0 5px;
+        }
+    }
+
+    .CodeMirror {
+        @extend .form-control;
+        box-shadow: none;
+        height: auto;
+        line-height: 1.5;
+        font-family: $font_monospace;
+        padding: 10px;
+
+        .cm-comment {
+            font-family: $font_monospace;
+            font-size: 14px;
+        }
+    }
+
+    .CodeMirror-code { min-height: 100px; }
+
+    .helpers {
+        border-top: 1px solid #ddd;
+    }
+
+    .markdown-cheatsheet-helper {
+        padding: 10px;
+        display: inline-block;
+        svg {
+            height: 14px;
+            width: 24px;
+            position: relative;
+            bottom: -2px;
+            margin-right: 3px;
+            opacity: 0.65;
+        }
+    }
+
+    .markdown-asset-helper {
+        padding: 10px;
+        display: inline-block;
+        color: #ccc;
+
+        .icon {
+            margin-right: 3px;
+        }
+    }
+
+    .markdown-preview {
+        padding: 30px;
+        h1, h2, h3, h4, h5, h6, p, blockquote {
+            color: #333;
+            font-size: 16px;
+            line-height: 25px;
+            margin-bottom: .5em;
+        }
+
+        li {
+            color: #333;
+            line-height: 1;
+            margin-bottom: .25em;
+        }
+
+        blockquote {
+            font-style: italic;
+        }
+
+        blockquote p:last-child {
+            margin-bottom: 0;
+        }
+
+        hr {
+            margin: 1em 0 .5em 0 !important;
+        }
+
+        img {
+            max-width: 100%;
+        }
+    }
+
+    .markdown-writer {
+        position: relative;
+    }
+}
+
+// The Grid
+.grid-fieldtype .markdown-fieldtype {
+    .markdown-wrap {
+        border: 0;
+        border-radius: 0;
+    }
+
+    .markdown-preview {
+        border: none;
+        padding: 10px;
+        text-align: left;
+        p { line-height: 1.2; }
+    }
+
+}

@@ -1,0 +1,74 @@
+.dossier {
+    font-size: 14px;
+
+    a { font-size: 16px; }
+
+    .cell-slug {
+        color: #777;
+        font-family: $font_monospace;
+        font-size: 12px;
+        a { font-size: 13px; }
+    }
+
+    .column-sortable.active {
+        padding-bottom: 10px;
+        border-bottom: 2px solid $brand-primary;
+    }
+
+
+    &, thead, thead tr, thead th {
+        border: none;
+    }
+
+    tbody tr {
+        border: none;
+        &:not(:last-child) {
+            border-bottom: solid 1px $color_border;
+        }
+    }
+
+    .column-sortable .icon {
+        float: right;
+        top: 6px;
+        right: 5px;
+    }
+
+    .checkbox-col {
+        width: 45px;
+    }
+
+    .column-actions {
+        width: 45px;
+        text-align: center;
+    }
+
+    .checkbox-col label:before {
+        margin-right: 0;
+    }
+}
+
+.dossier-table-wrapper {
+    .bulk-actions {
+        padding: 15px;
+        border-top: 1px solid #ddd;
+    }
+}
+
+.card.flush table.dossier {
+    thead label {
+        margin: 0;
+    }
+    thead th {
+        padding: 12px 10px;
+    }
+    td { padding: 10px; }
+    tr th:first-child,
+    tr td.checkbox-col {
+        padding-left: 15px;
+    }
+    tr td:first-child:not(.checkbox-col) {
+        padding-left: 30px;
+    }
+}
+
+.dossier-search { flex: 1; }
