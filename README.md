@@ -1,8 +1,6 @@
 # Statamic Boilerplate
 A bootstrap for quick development and deployment with [Envoyer.io](https://envoyer.io)
 
-## This is a WIP
-
 ## Setting up deployment in Envoyer
 - Go through the basic setup of adding your server and repository to Envoyer. Choose "other" when asked for the type of application
 - Copy over the `.env` details into the "Manage Environment" of Envoyer
@@ -43,6 +41,9 @@ A bootstrap for quick development and deployment with [Envoyer.io](https://envoy
 - The site/users folder is nwo in storage/users
 - Split the theme folder off and only make the compiled assets available
     - This has the benefit of not having all your templates publicly accessible
+    - Moved the gulpfile to the root of the project for easier terminal access
+    - The node_modules will now be installed in the root of the project
+    - Added yarn for faster npm installs and dependency management
 
 This allows for a deployment workflow where the `storage` folder is symlinked between releases and changes that are made through the control panel are kept.
 
@@ -62,12 +63,12 @@ STATIC_CACHE_LENGTH=86400
 STATIC_CACHE_FILE_PATH=static
 STATIC_CACHE_IGNORE_QUERY=true
 ```
-These settings cannot be changed through the control panel.
+These settings cannot be changed through the control panel. A `.env.example` is included in the project to get you started.
 
 ## Included Add-ons
 90% Of sites that we build need the following Add-ons so they're included by default, these can be removed easily:
 - Sitemap
 - CookieConsent
 
-Take a look at our [public repositories](https://github.com/marbles) to see if we might have another addon that might be useful to you.
+Take a look at our [repositories](https://github.com/marbles) to see if we might have another addon that might be useful to you.
 
