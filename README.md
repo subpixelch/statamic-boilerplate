@@ -32,6 +32,7 @@ A bootstrap for quick development and deployment with [Envoyer.io](https://envoy
          php please clear:stache  
          php please clear:static  
          ```
+
  - Point your website root to the `public` folder
 
 ## Changes to the file structure
