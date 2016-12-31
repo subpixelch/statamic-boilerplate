@@ -29,9 +29,9 @@ A bootstrap for quick development and deployment with [Envoyer.io](https://envoy
         *Depending on how much caching you enable*  
          ```
          cd {{release}}
-         php please clear:cache
-         php please clear:stache
-         php please clear:static
+         php please clear:cache  
+         php please clear:stache  
+         php please clear:static  
          ```
  - Point your website root to the `public` folder
 
