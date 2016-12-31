@@ -14,26 +14,26 @@ A bootstrap for quick development and deployment with [Envoyer.io](https://envoy
     - To Folder: `storage`
 - Add the following deployment hooks
     - Before Activate New Release
-        - Yarn  
-        ```
+        - Yarn
+        ```bash
         cd {{release}}
         yarn
         ```
         - Gulp
-        ```
+        ```bash
         cd {{release}}
         gulp --production
         ```
     - After Activate New Release
-        - Clear cache  
-         ```
-         cd {{release}}
-         php please clear:cache  
-         php please clear:stache  
-         php please clear:static  
-         ```
+        - Clear cache
+        ```bash
+        cd {{release}}
+        php please clear:cache  
+        php please clear:stache  
+        php please clear:static  
+        ```
 
- - Point your website root to the `public` folder
+- Point your website root to the `public` folder
 
 ## Changes to the file structure
 - Running Statamic above webroot to prevent accidents
