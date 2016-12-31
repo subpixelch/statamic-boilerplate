@@ -1,0 +1,28 @@
+<article class="row">
+    {{ if align == "full" }}
+    <div class="col-xs-12">
+        {{ assets:image }}
+        <img src="{{ glide src="{id}" fit="crop" }}" alt="{{ title }}" class="img-responsive">
+        {{ /assets:image }}
+        {{ content | raw }}
+    </div>
+    {{ elseif align == "left" }}
+    <div class="col-xs-12 col-sm-6">
+        {{ assets:image }}
+        <img src="{{ glide src="{id}" fit="crop" }}" alt="{{ title }}" class="img-responsive">
+        {{ /assets:image }}
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        {{ content | raw }}
+    </div>
+    {{ elseif align == "right" }}
+    <div class="col-xs-12 col-sm-6">
+        {{ content | raw }}
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        {{ assets:image }}
+        <img src="{{ glide src="{id}" fit="crop" }}" alt="{{ title }}" class="img-responsive">
+        {{ /assets:image }}
+    </div>
+    {{ /if }}
+</article>
