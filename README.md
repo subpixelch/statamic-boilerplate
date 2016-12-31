@@ -26,7 +26,7 @@ A bootstrap for quick development and deployment with [Envoyer.io](https://envoy
         ```
     - After Activate New Release
         - Clear cache  
-        *Depending on how much caching you enable*
+        *Depending on how much caching you enable*  
          ```
          cd {{release}}
          php please clear:cache
