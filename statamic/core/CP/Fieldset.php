@@ -164,6 +164,14 @@ class Fieldset implements FieldsetContract
             return $this->contents;
         }
 
+        if (!empty($contents['fields'])) {
+            foreach ($contents['fields'] as $key => $config) {
+                if (!is_array($config)) {
+                    $contents['fields'][$key] = [];
+                }
+            }
+        }
+
         $this->contents = $contents;
     }
 
