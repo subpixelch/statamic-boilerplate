@@ -4,6 +4,8 @@
 	<h1>A Marbles Statamic Website</h1>
 </div>
 
-{{ page_content }}
-	{{ partial src="sets/{type}" }}
-{{ /page_content }}
+<section class="content container">
+	{{ page_content scope="page_content" }}
+		{{ partial src="sets/{type}" }}
+	{{ /page_content }}
+</section>
